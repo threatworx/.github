@@ -1,0 +1,5 @@
+{
+    "name": "ThreatWorx Code Scan",
+    "description": "ThreatWorx workflow for basic code scan.",
+    "iconName": "tw-icon"
+}

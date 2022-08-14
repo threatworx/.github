@@ -1,0 +1,25 @@
+name: ThreatWorx Code Scan
+
+on:
+  schedule:
+    - cron: '*/60 * * * *' # Runs every 5 mins
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner
+          
+      - name: install twigs
+        run: |
+          python -m pip install --upgrade pip
+          pip install twigs
+          
+      - name: execute twigs
+        env: 
+          TW_HANDLE: ${{ secrets.TW_HANDLE }}
+          TW_INSTANCE: ${{ secrets.TW_INSTANCE }}
+          TW_TOKEN: ${{ secrets.TW_TOKEN }}
+        run: twigs -vv repo --repo ${{ github.workspace }}
